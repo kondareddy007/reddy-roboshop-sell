@@ -39,6 +39,7 @@ dnf install nodejs -y &>>$LOG_FILE
 VALIDATE $? "installing nodejs"
 
 useradd roboshop &>>$LOG_FILE
+exit 1
 VALIDATE $? "creating roboshop user"
 
 mkdir /app &>>$LOG_FILE
