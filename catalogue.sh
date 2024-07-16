@@ -9,8 +9,6 @@ Y="\e[33m"
 TIME_STAMP=$(date +%F:%H:%M:%S)
 LOG_FILE=/tmp/$0_$TIME_STAMP.log
 
-MONGODB_HOST=172.31.29.138
-
 VALIDATE(){
     if [ $1 -ne 0 ]
     then 
@@ -79,5 +77,5 @@ VALIDATE $? "copying the mongo.repo"
 dnf install mongodb-org-shell -y &>>$LOG_FILE
 VALIDATE $? "install mongodb-org-sell client install"
 
-mongo --host MONGODB_HOST </app/schema/catalogue.js  &>>$LOG_FILE
+mongo --host 172.31.29.138 </app/schema/catalogue.js  &>>$LOG_FILE
 VALIDATE $? "Loading calogue into mongoDB"
