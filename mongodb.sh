@@ -27,7 +27,7 @@ else
     echo -e "$G you are root user $N"
 fi
 
-cp mongo.repo /etc/yum.repos.d/mongo.repo &>>$LOG_FILE
+cp /home/centos/reddy-roboshop-sell/mongo.repo /etc/yum.repos.d/mongo.repo &>>$LOG_FILE
 VALIDATE $? "Cpoied mongo.repo"
 
 dnf install mongodb-org -y  &>>$LOG_FILE
