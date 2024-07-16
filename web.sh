@@ -36,9 +36,6 @@ VALIDATE $? "Enabling the nginx server"
 systemctl start nginx &>>$LOG_FILE
 VALIDATE $? "Starting the nginx server"
 
-http://34.229.197.124:80 &>>$LOG_FILE
-VALIDATE $? "Access to the nginx server"
-
 rm -rf /usr/share/nginx/html/*  &>>$LOG_FILE
 VALIDATE $? "Removing the html files in nginx"
 
