@@ -9,7 +9,7 @@ Y="\e[33m"
 TIME_STAMP=$(date +%F:%H:%M:%S)
 LOG_FILE=/tmp/$0_$TIME_STAMP.log
 
-MONGODB_HOST=172.31.26.154
+MONGODB_HOST=172.31.29.138
 
 VALIDATE(){
     if [ $1 -ne 0 ]
