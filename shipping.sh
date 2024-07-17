@@ -27,28 +27,54 @@ else
     echo -e "$G you are root user $N"
 fi
 
-dnf install maven -y
+dnf install maven -y  $LOG_FILE
+VALIDATE $? "Install maven"
+
 
 id roboshop
 if [ $? -ne 0 ]
 then
    useradd roboshop
-   VALIDATE $? "creating the roboshop user"
+   VALIDATE $? "Creating the roboshop user"
 else
-   echo -e "roboshop user already exists ---$Y SKIPPING $N"
+   echo -e "Roboshop user already exists ---$Y SKIPPING $N"
 fi
 
-mkdir -p /app
+mkdir -p /app &>>$LOG_FILE
+VALIDATE $? "Create app directory"
 
-curl -L -o /tmp/shipping.zip https://roboshop-builds.s3.amazonaws.com/shipping.zip
-
-cd /app
-
-unzip -o /tmp/shipping.zip
+curl -L -o /tmp/shipping.zip https://roboshop-builds.s3.amazonaws.com/shipping.zip &>>$LOG_FILE
+VALIDATE $? "Downloading shipping  zip file"
 
 cd /app
 
-mvn clean package
+unzip -o /tmp/shipping.zip &>>$LOG_FILE
+VALIDATE $? "Unzip the shipping zip file"
 
-mv target/shipping-1.0.jar shipping.jar
+cd /app
+
+mvn clean package &>>$LOG_FILE
+VALIDATE $? "maven commands"
+
+mv target/shipping-1.0.jar shipping.jar &>>$LOG_FILE
+VALIDATE $? "Moving shipping jar file into target folder"
+
+cp /home/centos/reddy-roboshop-sell/shipping.service /etc/systemd/system/shipping.service  &>>$LOG_FILE
+VALIDATE $? "Copying shipping services into /etc/systemd/system/ folder"
+
+systemctl daemon-reload &>>$LOG_FILE
+VALIDATE $? "Reload the daemon"
+
+systemctl enable shipping  &>>$LOG_FILE
+VALIDATE $? "Enable shipping"
+
+systemctl start shipping &>>$LOG_FILE
+VALIDATE $? "Started shipping"
+
+dnf install mysql -y &>>$LOG_FILE
+VALIDATE $? "Installed mysql"
+
+systemctl restart shipping &>>$LOG_FILE
+VALIDATE $? "Restart shipping"
+
 
