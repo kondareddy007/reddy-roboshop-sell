@@ -27,26 +27,26 @@ else
     echo -e "$G you are root user $N"
 fi
 
-dnf module disable mysql -y $LOG_FILE
+dnf module disable mysql -y &>>$LOG_FILE
 VALIDATE $? "Disable mysql "
 
-cp /home/centos/reddy-roboshop-sell/mysql.repo /etc/yum.repos.d/mysql.repo $LOG_FILE
+cp /home/centos/reddy-roboshop-sell/mysql.repo /etc/yum.repos.d/mysql.repo &>>$LOG_FILE
 VALIDATE $? "Copying the mysql.repo data"
 
-dnf install mysql-community-server -y $LOG_FILE
+dnf install mysql-community-server -y &>>$LOG_FILE
 VALIDATE $? "Installing  mysql server"
 
-systemctl enable mysqld $LOG_FILE
+systemctl enable mysqld &>>$LOG_FILE
 VALIDATE $? "Enable mysql "
 
 
-systemctl start mysqld  $LOG_FILE
+systemctl start mysqld  &>>$LOG_FILE
 VALIDATE $? "Starting mysql "
 
-mysql_secure_installation --set-root-pass RoboShop@1 $LOG_FILE
+mysql_secure_installation --set-root-pass RoboShop@1 &>>$LOG_FILE
 VALIDATE $? "Creating the  mysql password "
 
-mysql -uroot -pRoboShop@1 $LOG_FILE
+mysql -uroot -pRoboShop@1 &>>$LOG_FILE
 VALIDATE $? "Checking  mysql password working or not"
 
 
