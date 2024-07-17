@@ -26,3 +26,29 @@ then
 else
     echo -e "$G you are root user $N"
 fi
+
+dnf install maven -y
+
+id roboshop
+if [ $? -ne 0 ]
+then
+   useradd roboshop
+   VALIDATE $? "creating the roboshop user"
+else
+   echo -e "roboshop user already exists ---$Y SKIPPING $N"
+fi
+
+mkdir -p /app
+
+curl -L -o /tmp/shipping.zip https://roboshop-builds.s3.amazonaws.com/shipping.zip
+
+cd /app
+
+unzip -o /tmp/shipping.zip
+
+cd /app
+
+mvn clean package
+
+mv target/shipping-1.0.jar shipping.jar
+
