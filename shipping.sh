@@ -74,7 +74,7 @@ VALIDATE $? "Started shipping"
 dnf install mysql -y &>>$LOG_FILE
 VALIDATE $? "Installed mysql"
 
-mysql -h <MYSQL-SERVER-IPADDRESS> -uroot -pRoboShop@1 < /app/schema/shipping.sql  &>>$LOG_FILE
+mysql -h 172.31.95.204 -uroot -pRoboShop@1 < /app/schema/shipping.sql  &>>$LOG_FILE
 VALIDATE $? "Shipping.sql data into Mysql database"
 
 systemctl restart shipping &>>$LOG_FILE
