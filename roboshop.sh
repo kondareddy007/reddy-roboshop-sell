@@ -13,7 +13,6 @@ then
 else
      INSTANCE_TYPE="t2.micro"
 fi
-done
 aws ec2 run-instances --image-id $IMAGE_ID  --instance-type $INSTANCE_TYPE   --security-group-ids $SG_ID 
 
 done
