@@ -1,6 +1,6 @@
 #!/bin/bash
 
-IMAGE_ID=ami-0182f373e66f89c85
+IMAGE_ID=ami-0b4f379183e5706b9
 SG_ID=sg-06b8a8118fee179ad
 INSTANCES=( "mongodb" "redis" "mysql" "rabbitmq" "catalogue" "user" "cart" "shipping" "payment" "dispatch" "web" )
 DOMAIN_NAME="reddy1229.online"
