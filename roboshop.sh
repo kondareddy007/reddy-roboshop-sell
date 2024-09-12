@@ -37,5 +37,6 @@ IP_ADDRESS=$(aws ec2 run-instances --image-id $IMAGE_ID  --instance-type $INSTAN
         }
         }]
     }
+      '
 
 done
